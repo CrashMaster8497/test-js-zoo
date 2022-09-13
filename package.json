@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint **/*.js",
     "prettier": "prettier --check **/*.js",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "repository": {
     "type": "git",
