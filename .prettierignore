@@ -112,6 +112,7 @@ dist
 .npmrc
 .prettierignore
 .prettierrc.*
+babel.config.*
 jest.config.*
 LICENSE
 package-lock.*
