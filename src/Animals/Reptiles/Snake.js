@@ -6,5 +6,13 @@ export default class Snake extends Reptile {
         super();
         this.requiredSpaceSqFt = 2;
         this.favoriteFood = Meat;
+
+        this.friendlyAnimals = [Snake];
     }
+
+    isFriendlyWith = (animal) => {
+        return this.friendlyAnimals.some(
+            (friendly) => animal instanceof friendly
+        );
+    };
 }

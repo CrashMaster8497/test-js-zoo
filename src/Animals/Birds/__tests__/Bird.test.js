@@ -12,5 +12,6 @@ describe('Bird', () => {
 
         expect(bird.requiredSpaceSqFt).toBeNull();
         expect(bird.favoriteFood).toBeNull();
+        expect(bird.isFriendlyWith()).toBeNull();
     });
 });

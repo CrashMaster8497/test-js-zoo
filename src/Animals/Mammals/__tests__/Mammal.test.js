@@ -11,5 +11,7 @@ describe('Mammal', () => {
         expect(mammal).toBeInstanceOf(Animal);
 
         expect(mammal.requiredSpaceSqFt).toBeNull();
+        expect(mammal.favoriteFood).toBeNull();
+        expect(mammal.isFriendlyWith()).toBeNull();
     });
 });

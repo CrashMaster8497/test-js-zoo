@@ -12,5 +12,6 @@ describe('Reptile', () => {
 
         expect(reptile.requiredSpaceSqFt).toBeNull();
         expect(reptile.favoriteFood).toBeNull();
+        expect(reptile.isFriendlyWith()).toBeNull();
     });
 });

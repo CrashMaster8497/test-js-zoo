@@ -6,5 +6,13 @@ export default class Penguin extends Bird {
         super();
         this.requiredSpaceSqFt = 10;
         this.favoriteFood = Meat;
+
+        this.friendlyAnimals = [Penguin];
     }
+
+    isFriendlyWith = (animal) => {
+        return this.friendlyAnimals.some(
+            (friendly) => animal instanceof friendly
+        );
+    };
 }

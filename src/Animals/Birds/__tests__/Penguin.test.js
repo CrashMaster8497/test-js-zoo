@@ -1,6 +1,12 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, test } from '@jest/globals';
 import Meat from '../../../Food/Meat';
+import Bison from '../../Mammals/Bison';
+import Elephant from '../../Mammals/Elephant';
+import Lion from '../../Mammals/Lion';
+import Snake from '../../Reptiles/Snake';
+import Turtle from '../../Reptiles/Turtle';
 import Bird from '../Bird';
+import Parrot from '../Parrot';
 import Penguin from '../Penguin';
 
 describe('Penguin', () => {
@@ -14,4 +20,32 @@ describe('Penguin', () => {
         expect(penguin.requiredSpaceSqFt).toEqual(10);
         expect(penguin.favoriteFood).toEqual(Meat);
     });
+
+    const getFriendlyAnimals = () => [new Penguin()];
+    test.each(getFriendlyAnimals())('should be friendly with %p', (animal) => {
+        const penguin = new Penguin();
+
+        const actual = penguin.isFriendlyWith(animal);
+
+        expect(actual).toEqual(true);
+    });
+
+    const getNotFriendlyAnimals = () => [
+        new Lion(),
+        new Bison(),
+        new Elephant(),
+        new Parrot(),
+        new Snake(),
+        new Turtle(),
+    ];
+    test.each(getNotFriendlyAnimals())(
+        'should not be friendly with %p',
+        (animal) => {
+            const penguin = new Penguin();
+
+            const actual = penguin.isFriendlyWith(animal);
+
+            expect(actual).toEqual(false);
+        }
+    );
 });

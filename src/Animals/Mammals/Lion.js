@@ -6,5 +6,13 @@ export default class Lion extends Mammal {
         super();
         this.requiredSpaceSqFt = 1000;
         this.favoriteFood = Meat;
+
+        this.friendlyAnimals = [Lion];
     }
+
+    isFriendlyWith = (animal) => {
+        return this.friendlyAnimals.some(
+            (friendly) => animal instanceof friendly
+        );
+    };
 }
