@@ -1,0 +1,26 @@
+{
+  "name": "test-js-zoo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint **/*.js",
+    "prettier": "prettier --check **/*.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrashMaster8497/test-js-zoo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CrashMaster8497/test-js-zoo/issues"
+  },
+  "homepage": "https://github.com/CrashMaster8497/test-js-zoo#readme",
+  "devDependencies": {
+    "eslint": "8.23.1",
+    "jest": "29.0.3",
+    "prettier": "2.7.1"
+  }
+}
