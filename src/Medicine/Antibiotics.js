@@ -1,7 +1,3 @@
-const { Medicine } = require('./Medicine');
+import Medicine from './Medicine';
 
-class Antibiotics extends Medicine {}
-
-module.exports = {
-    Antibiotics,
-};
+export default class Antibiotics extends Medicine {}

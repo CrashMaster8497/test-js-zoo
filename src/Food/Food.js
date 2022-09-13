@@ -1,5 +1,1 @@
-class Food {}
-
-module.exports = {
-    Food,
-};
+export default class Food {}

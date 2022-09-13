@@ -1,5 +1,1 @@
-class Medicine {}
-
-module.exports = {
-    Medicine,
-};
+export default class Medicine {}

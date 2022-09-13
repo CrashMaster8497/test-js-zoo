@@ -1,7 +1,3 @@
-const { Food } = require('./Food');
+import Food from './Food';
 
-class Vegetable extends Food {}
-
-module.exports = {
-    Vegetable,
-};
+export default class Vegetable extends Food {}
