@@ -1,13 +1,13 @@
 import { describe, expect, it } from '@jest/globals';
 import Food from '../Food';
-import Vegetable from '../Vegetable';
+import Vegetables from '../Vegetables';
 
 describe('Vegetable', () => {
     it('should be able to create vegetable', () => {
-        const vegetable = new Vegetable();
+        const vegetables = new Vegetables();
 
-        expect(vegetable).toBeDefined();
-        expect(vegetable).not.toBeNull();
-        expect(vegetable).toBeInstanceOf(Food);
+        expect(vegetables).toBeDefined();
+        expect(vegetables).not.toBeNull();
+        expect(vegetables).toBeInstanceOf(Food);
     });
 });
