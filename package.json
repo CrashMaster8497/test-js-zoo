@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/CrashMaster8497/test-js-zoo#readme",
   "devDependencies": {
+    "@babel/preset-env": "7.19.0",
     "eslint": "8.23.1",
     "jest": "29.0.3",
     "prettier": "2.7.1"

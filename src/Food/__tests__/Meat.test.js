@@ -1,6 +1,6 @@
-const { describe, it, expect } = require('@jest/globals');
-const { Food } = require('../Food');
-const { Meat } = require('../Meat');
+import { describe, expect, it } from '@jest/globals';
+import Food from '../Food';
+import Meat from '../Meat';
 
 describe('Meat', () => {
     it('should be able to create meat', () => {

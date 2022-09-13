@@ -1,6 +1,6 @@
-const { describe, it, expect } = require('@jest/globals');
-const { Antiinflammatory } = require('../Antiinflammatory');
-const { Medicine } = require('../Medicine');
+import { describe, it, expect } from '@jest/globals';
+import Antiinflammatory from '../Antiinflammatory';
+import Medicine from '../Medicine';
 
 describe('Antiinflammatory', () => {
     it('should be able to create antiinflammatory', () => {
