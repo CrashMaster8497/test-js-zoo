@@ -1,7 +1,8 @@
 export default class Enclosure {
-    constructor(name, squareFeet) {
+    constructor(name, squareFeet, parentZoo) {
         this.name = name || '';
         this.squareFeet = squareFeet || 0;
+        this.parentZoo = parentZoo || null;
         this.animals = [];
     }
 

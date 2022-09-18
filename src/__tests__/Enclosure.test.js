@@ -4,6 +4,7 @@ import Bison from '../Animals/Mammals/Bison';
 import Elephant from '../Animals/Mammals/Elephant';
 import Lion from '../Animals/Mammals/Lion';
 import Enclosure from '../Enclosure';
+import Zoo from '../Zoo';
 
 describe('Enclosure', () => {
     it('should be able to create default enclosure', () => {
@@ -11,20 +12,20 @@ describe('Enclosure', () => {
 
         expect(enclosure.name).toEqual('');
         expect(enclosure.squareFeet).toEqual(0);
-        //expect(enclosure.parentZoo).toEqual(null);
+        expect(enclosure.parentZoo).toEqual(null);
         expect(enclosure.animals).toEqual([]);
     });
 
     it('should be able to create enclosure', () => {
         const name = 'Name';
         const squareFeet = 1000;
-        //const parentZoo = new Zoo();
+        const parentZoo = new Zoo();
 
-        const enclosure = new Enclosure(name, squareFeet /*, parentZoo*/);
+        const enclosure = new Enclosure(name, squareFeet, parentZoo);
 
         expect(enclosure.name).toEqual(name);
         expect(enclosure.squareFeet).toEqual(squareFeet);
-        //expect(enclosure.parentZoo).toEqual(parentZoo);
+        expect(enclosure.parentZoo).toStrictEqual(parentZoo);
     });
 
     it('should be able to add animal', () => {
