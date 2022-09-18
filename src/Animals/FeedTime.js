@@ -1,5 +1,6 @@
 export default class FeedTime {
-    constructor(time) {
+    constructor(time, feedByZooKeeper) {
         this.time = time;
+        this.feedByZooKeeper = feedByZooKeeper;
     }
 }

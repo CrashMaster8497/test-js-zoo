@@ -8,6 +8,7 @@ import Parrot from '../Birds/Parrot';
 import Penguin from '../Birds/Penguin';
 import Snake from '../Reptiles/Snake';
 import Turtle from '../Reptiles/Turtle';
+import ZooKeeper from '../../Employees/ZooKeeper';
 
 describe('Animal', () => {
     it('should be able to create animal', () => {
@@ -51,9 +52,12 @@ describe('Animal', () => {
     );
 
     test.each(getAnimalCases())('%p should be able to feed', (animal) => {
-        animal.feed();
+        const zooKeeper = new ZooKeeper();
+
+        animal.feed(zooKeeper);
 
         expect(animal.feedTimes).toHaveLength(1);
+        expect(animal.feedTimes[0].feedByZooKeeper).toStrictEqual(zooKeeper);
     });
 
     test.each(getAnimalCases())(
