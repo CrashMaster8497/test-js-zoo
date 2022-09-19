@@ -1,3 +1,3 @@
 export default class HireValidator {
-    validateEmployee = () => {};
+    validateEmployee = () => null;
 }

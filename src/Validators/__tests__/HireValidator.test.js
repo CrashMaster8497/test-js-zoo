@@ -14,6 +14,6 @@ describe('HireValidator', () => {
 
         const actual = validator.validateEmployee();
 
-        expect(actual).toBeUndefined();
+        expect(actual).toBeNull();
     });
 });
