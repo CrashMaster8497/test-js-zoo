@@ -37,14 +37,14 @@ export default class ZooKeeper extends Employee {
                     nowDay.valueOf() != time1Day.valueOf() ||
                     nowDay.valueOf() != time2Day.valueOf()
                 ) {
-                    animal.feed();
+                    animal.feed(this);
                     return true;
                 }
 
                 return false;
             }
 
-            animal.feed();
+            animal.feed(this);
             return true;
         }
 

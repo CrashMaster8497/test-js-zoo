@@ -6,18 +6,29 @@ import VeterinarianHireValidator from '../VeterinarianHireValidator';
 import ZooKeeperHireValidator from '../ZooKeeperHireValidator';
 
 describe('HireValidatorProvider', () => {
+    it('should be able to create hire validator provider', () => {
+        const validatorProvider = new HireValidatorProvider();
+
+        expect(validatorProvider).toBeDefined();
+        expect(validatorProvider).not.toBeNull();
+    });
+
     it('should return new zoo keeper hire validator', () => {
+        const validatorProvider = new HireValidatorProvider();
+
         const zooKeeper = new ZooKeeper();
 
-        const validator = HireValidatorProvider.getHireValidator(zooKeeper);
+        const validator = validatorProvider.getHireValidator(zooKeeper);
 
         expect(validator).toBeInstanceOf(ZooKeeperHireValidator);
     });
 
     it('should return new veterinarian hire validator', () => {
+        const validatorProvider = new HireValidatorProvider();
+
         const veterinarian = new Veterinarian();
 
-        const validator = HireValidatorProvider.getHireValidator(veterinarian);
+        const validator = validatorProvider.getHireValidator(veterinarian);
 
         expect(validator).toBeInstanceOf(VeterinarianHireValidator);
     });

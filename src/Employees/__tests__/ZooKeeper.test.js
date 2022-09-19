@@ -66,6 +66,7 @@ describe('ZooKeeper', () => {
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
         expect(bison.feed).toHaveBeenCalledTimes(1);
+        expect(bison.feed).toHaveBeenCalledWith(zooKeeper);
     });
 
     it('should not feed animal without experience', () => {
@@ -83,20 +84,22 @@ describe('ZooKeeper', () => {
         zooKeeper.hasAnimalExperience = jest.fn(() => true);
         const bison = new Bison();
 
-        bison.feed = jest.fn(() =>
-            bison.feedTimes.push(new FeedTime(new Date(0)))
-        );
+        bison.feed = jest.fn((zooKeeper) => {
+            bison.feedTimes.push(new FeedTime(new Date(0), zooKeeper));
+        });
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
         expect(bison.feed).toHaveBeenCalledTimes(1);
+        expect(bison.feed).toHaveBeenCalledWith(zooKeeper);
 
-        bison.feed = jest.fn(() =>
-            bison.feedTimes.push(new FeedTime(new Date()))
-        );
+        bison.feed = jest.fn((zooKeeper) => {
+            bison.feedTimes.push(new FeedTime(new Date(), zooKeeper));
+        });
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
         expect(zooKeeper.feedAnimal(bison)).toEqual(false);
         expect(bison.feed).toHaveBeenCalledTimes(2);
+        expect(bison.feed).toHaveBeenLastCalledWith(zooKeeper);
     });
 });

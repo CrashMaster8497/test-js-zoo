@@ -1,14 +1,11 @@
-import { describe, expect, it, jest, test } from '@jest/globals';
+import { describe, expect, it, test } from '@jest/globals';
 import Bison from '../Animals/Mammals/Bison';
 import Elephant from '../Animals/Mammals/Elephant';
 import Lion from '../Animals/Mammals/Lion';
 import Veterinarian from '../Employees/Veterinarian';
 import ZooKeeper from '../Employees/ZooKeeper';
-import HireValidatorProvider from '../Validators/HireValidatorProvider';
 import Enclosure from '../Enclosure';
 import Zoo from '../Zoo';
-import ZooKeeperHireValidator from '../Validators/ZooKeeperHireValidator';
-import VeterinarianHireValidator from '../Validators/VeterinarianHireValidator';
 
 describe('Zoo', () => {
     it('should be able to create default zoo', () => {
@@ -113,20 +110,10 @@ describe('Zoo', () => {
         'should be able to hire employee %p',
         (employee) => {
             const zoo = new Zoo();
+            const enclosure = zoo.addEnclosure('Enclosure', 1000);
+            enclosure.addAnimal(new Bison());
 
-            const veterinarianValidator = new VeterinarianHireValidator();
-            veterinarianValidator.validateEmployee = jest.fn(() => []);
-
-            const zooKeeperValidator = new ZooKeeperHireValidator();
-            zooKeeperValidator.validateEmployee = jest.fn(() => []);
-
-            HireValidatorProvider.getHireValidator = jest.fn((employee) => {
-                if (employee instanceof Veterinarian) {
-                    return veterinarianValidator;
-                } else {
-                    return zooKeeperValidator;
-                }
-            });
+            employee.addAnimalExperience(Bison);
 
             zoo.hireEmployee(employee);
 
@@ -138,24 +125,8 @@ describe('Zoo', () => {
         'should not hire employee %p without needed experiences',
         (employee) => {
             const zoo = new Zoo();
-
-            const veterinarianValidator = new VeterinarianHireValidator();
-            veterinarianValidator.validateEmployee = jest.fn(() => [
-                'No needed experience',
-            ]);
-
-            const zooKeeperValidator = new ZooKeeperHireValidator();
-            zooKeeperValidator.validateEmployee = jest.fn(() => [
-                'No needed experience',
-            ]);
-
-            HireValidatorProvider.getHireValidator = jest.fn((employee) => {
-                if (employee instanceof Veterinarian) {
-                    return veterinarianValidator;
-                } else {
-                    return zooKeeperValidator;
-                }
-            });
+            const enclosure = zoo.addEnclosure('Enclosure', 1000);
+            enclosure.addAnimal(new Bison());
 
             expect(() => zoo.hireEmployee(employee)).toThrowError(
                 'No needed experience'
@@ -164,4 +135,35 @@ describe('Zoo', () => {
             expect(zoo.employees).not.toContain(employee);
         }
     );
+
+    // it('should be able to feed animals', () => {
+    //     const zoo = new Zoo();
+
+    //     const enclosure1 = zoo.addEnclosure('Enclosure 1', 1000);
+    //     const lion = new Lion();
+    //     lion.feed = jest.fn();
+    //     enclosure1.addAnimal(lion);
+    //     const enclosure2 = zoo.addEnclosure('Enclosure 2', 2000);
+    //     const bison = new Bison();
+    //     bison.feed = jest.fn();
+    //     enclosure2.addAnimal(bison);
+    //     const elephant = new Elephant();
+    //     elephant.feed = jest.fn();
+    //     enclosure2.addAnimal(elephant);
+
+    //     const zooKeeper1 = new ZooKeeper();
+    //     zooKeeper1.addAnimalExperience(Bison);
+    //     zooKeeper1.addAnimalExperience(Lion);
+    //     zoo.hireEmployee(zooKeeper1);
+    //     const zooKeeper2 = new ZooKeeper();
+    //     zooKeeper2.addAnimalExperience(Elephant);
+    //     zooKeeper2.addAnimalExperience(Lion);
+    //     zoo.hireEmployee(zooKeeper2);
+
+    //     zoo.feedAnimals();
+
+    //     expect(lion.feed).toBeCalledTimes(1);
+    //     expect(bison.feed).toBeCalledTimes(1);
+    //     expect(elephant.feed).toBeCalledTimes(1);
+    // });
 });

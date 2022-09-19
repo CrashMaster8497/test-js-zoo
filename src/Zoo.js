@@ -41,11 +41,13 @@ export default class Zoo {
     };
 
     hireEmployee = (employee) => {
-        const validator = HireValidatorProvider.getHireValidator(employee);
+        const validator = new HireValidatorProvider().getHireValidator(
+            employee
+        );
 
         if (
             validator
-                .validateEmployee(employee)
+                .validateEmployee(employee, this)
                 .includes('No needed experience')
         ) {
             throw new Error('No needed experience');
@@ -53,4 +55,17 @@ export default class Zoo {
 
         this.employees.push(employee);
     };
+
+    // feedAnimals = () => {
+    //     this.enclosures.forEach((enclosure) => {
+    //         enclosure.animals.forEach((animal) => {
+    //             const eligible = this.employees.filter(
+    //                 (employee) =>
+    //                     employee instanceof ZooKeeper &&
+    //                     employee.hasAnimalExperience(animal.constructor)
+    //             );
+    //             eligible[0].feedAnimal(animal);
+    //         });
+    //     });
+    // };
 }

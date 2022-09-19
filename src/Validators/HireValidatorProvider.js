@@ -3,7 +3,7 @@ import VeterinarianHireValidator from './VeterinarianHireValidator';
 import ZooKeeperHireValidator from './ZooKeeperHireValidator';
 
 export default class HireValidatorProvider {
-    static getHireValidator = (employee) => {
+    getHireValidator = (employee) => {
         if (employee instanceof ZooKeeper) {
             return new ZooKeeperHireValidator();
         } else {
