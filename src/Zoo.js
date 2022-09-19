@@ -1,3 +1,5 @@
+import Veterinarian from './Employees/Veterinarian';
+import ZooKeeper from './Employees/ZooKeeper';
 import Enclosure from './Enclosure';
 import HireValidatorProvider from './Validators/HireValidatorProvider';
 
@@ -56,16 +58,33 @@ export default class Zoo {
         this.employees.push(employee);
     };
 
-    // feedAnimals = () => {
-    //     this.enclosures.forEach((enclosure) => {
-    //         enclosure.animals.forEach((animal) => {
-    //             const eligible = this.employees.filter(
-    //                 (employee) =>
-    //                     employee instanceof ZooKeeper &&
-    //                     employee.hasAnimalExperience(animal.constructor)
-    //             );
-    //             eligible[0].feedAnimal(animal);
-    //         });
-    //     });
-    // };
+    feedAnimals = () => {
+        this.enclosures.forEach((enclosure) => {
+            enclosure.animals.forEach((animal) => {
+                const eligible = this.employees.filter(
+                    (employee) =>
+                        employee instanceof ZooKeeper &&
+                        employee.hasAnimalExperience(animal.constructor)
+                );
+                if (eligible.length > 0) {
+                    eligible[0].feedAnimal(animal);
+                }
+            });
+        });
+    };
+
+    healAnimals = () => {
+        this.enclosures.forEach((enclosure) => {
+            enclosure.animals.forEach((animal) => {
+                const eligible = this.employees.filter(
+                    (employee) =>
+                        employee instanceof Veterinarian &&
+                        employee.hasAnimalExperience(animal.constructor)
+                );
+                if (eligible.length > 0) {
+                    eligible[0].healAnimal(animal);
+                }
+            });
+        });
+    };
 }

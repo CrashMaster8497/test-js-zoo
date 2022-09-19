@@ -65,6 +65,9 @@ describe('ZooKeeper', () => {
         bison.feed = jest.fn();
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
+        expect(zooKeeper.hasAnimalExperience).toHaveBeenCalledWith(
+            bison.constructor
+        );
         expect(bison.feed).toHaveBeenCalledTimes(1);
         expect(bison.feed).toHaveBeenCalledWith(zooKeeper);
     });
@@ -76,6 +79,9 @@ describe('ZooKeeper', () => {
         bison.feed = jest.fn();
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(false);
+        expect(zooKeeper.hasAnimalExperience).toHaveBeenCalledWith(
+            bison.constructor
+        );
         expect(bison.feed).toHaveBeenCalledTimes(0);
     });
 
@@ -89,6 +95,9 @@ describe('ZooKeeper', () => {
         });
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
+        expect(zooKeeper.hasAnimalExperience).toHaveBeenCalledWith(
+            bison.constructor
+        );
         expect(bison.feed).toHaveBeenCalledTimes(1);
         expect(bison.feed).toHaveBeenCalledWith(zooKeeper);
 
@@ -97,8 +106,17 @@ describe('ZooKeeper', () => {
         });
 
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
+        expect(zooKeeper.hasAnimalExperience).toHaveBeenCalledWith(
+            bison.constructor
+        );
         expect(zooKeeper.feedAnimal(bison)).toEqual(true);
+        expect(zooKeeper.hasAnimalExperience).toHaveBeenCalledWith(
+            bison.constructor
+        );
         expect(zooKeeper.feedAnimal(bison)).toEqual(false);
+        expect(zooKeeper.hasAnimalExperience).toHaveBeenCalledWith(
+            bison.constructor
+        );
         expect(bison.feed).toHaveBeenCalledTimes(2);
         expect(bison.feed).toHaveBeenLastCalledWith(zooKeeper);
     });

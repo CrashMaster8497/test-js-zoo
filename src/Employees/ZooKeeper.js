@@ -17,7 +17,7 @@ export default class ZooKeeper extends Employee {
     };
 
     feedAnimal = (animal) => {
-        if (this.hasAnimalExperience()) {
+        if (this.hasAnimalExperience(animal.constructor)) {
             const now = new Date();
             if (animal.feedTimes.length >= 2) {
                 const time1 = animal.feedTimes.at(-1).time;
