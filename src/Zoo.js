@@ -1,4 +1,5 @@
 import Enclosure from './Enclosure';
+import HireValidatorProvider from './Validators/HireValidatorProvider';
 
 export default class Zoo {
     constructor(location) {
@@ -37,5 +38,19 @@ export default class Zoo {
         }
 
         throw new Error(`No available enclosure for animal ${newAnimal}`);
+    };
+
+    hireEmployee = (employee) => {
+        const validator = HireValidatorProvider.getHireValidator(employee);
+
+        if (
+            validator
+                .validateEmployee(employee)
+                .includes('No needed experience')
+        ) {
+            throw new Error('No needed experience');
+        }
+
+        this.employees.push(employee);
     };
 }

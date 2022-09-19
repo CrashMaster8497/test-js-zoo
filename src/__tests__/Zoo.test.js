@@ -1,9 +1,14 @@
-import { describe, expect, it, test } from '@jest/globals';
+import { describe, expect, it, jest, test } from '@jest/globals';
 import Bison from '../Animals/Mammals/Bison';
 import Elephant from '../Animals/Mammals/Elephant';
 import Lion from '../Animals/Mammals/Lion';
+import Veterinarian from '../Employees/Veterinarian';
+import ZooKeeper from '../Employees/ZooKeeper';
+import HireValidatorProvider from '../Validators/HireValidatorProvider';
 import Enclosure from '../Enclosure';
 import Zoo from '../Zoo';
+import ZooKeeperHireValidator from '../Validators/ZooKeeperHireValidator';
+import VeterinarianHireValidator from '../Validators/VeterinarianHireValidator';
 
 describe('Zoo', () => {
     it('should be able to create default zoo', () => {
@@ -103,4 +108,60 @@ describe('Zoo', () => {
             `No available enclosure for animal ${newAnimal}`
         );
     });
+
+    test.each([[new ZooKeeper()], [new Veterinarian()]])(
+        'should be able to hire employee %p',
+        (employee) => {
+            const zoo = new Zoo();
+
+            const veterinarianValidator = new VeterinarianHireValidator();
+            veterinarianValidator.validateEmployee = jest.fn(() => []);
+
+            const zooKeeperValidator = new ZooKeeperHireValidator();
+            zooKeeperValidator.validateEmployee = jest.fn(() => []);
+
+            HireValidatorProvider.getHireValidator = jest.fn((employee) => {
+                if (employee instanceof Veterinarian) {
+                    return veterinarianValidator;
+                } else {
+                    return zooKeeperValidator;
+                }
+            });
+
+            zoo.hireEmployee(employee);
+
+            expect(zoo.employees).toContain(employee);
+        }
+    );
+
+    test.each([[new ZooKeeper()], [new Veterinarian()]])(
+        'should not hire employee %p without needed experiences',
+        (employee) => {
+            const zoo = new Zoo();
+
+            const veterinarianValidator = new VeterinarianHireValidator();
+            veterinarianValidator.validateEmployee = jest.fn(() => [
+                'No needed experience',
+            ]);
+
+            const zooKeeperValidator = new ZooKeeperHireValidator();
+            zooKeeperValidator.validateEmployee = jest.fn(() => [
+                'No needed experience',
+            ]);
+
+            HireValidatorProvider.getHireValidator = jest.fn((employee) => {
+                if (employee instanceof Veterinarian) {
+                    return veterinarianValidator;
+                } else {
+                    return zooKeeperValidator;
+                }
+            });
+
+            expect(() => zoo.hireEmployee(employee)).toThrowError(
+                'No needed experience'
+            );
+
+            expect(zoo.employees).not.toContain(employee);
+        }
+    );
 });
